@@ -1,0 +1,15 @@
+thead {
+  font-weight: bold;
+  color: crimson;
+  background-color: greenyellow;
+}
+
+table,
+tbody {
+  color: black;
+  background-color: lightcyan;
+}
+
+tbody > tr:hover {
+  background-color: whitesmoke;
+}

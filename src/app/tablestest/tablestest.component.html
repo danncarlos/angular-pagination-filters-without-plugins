@@ -1,0 +1,60 @@
+<p>
+  tablestest works!
+</p>
+
+<input
+  #order
+  id="orderSearch"
+  type="text"
+  [(ngModel)]="filterString"
+  (input)="ordersFilter(order.value)"
+/>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Team</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="filterString == ''">
+    <tr *ngFor="let item of itemsList|slice:startI:endI">
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.team}}</td>
+      <td>Normal</td>
+    </tr>
+  </tbody>
+
+  <tbody *ngIf="filterString != ''">
+    <tr *ngFor="let item of filterItemsList|slice:startI:endI">
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.team}}</td>
+      <td>filtrada</td>
+    </tr>
+  </tbody>
+</table>
+
+<div id="tablePagination">
+  <button (click)="changePage(1)"><<</button>
+  <button (click)="changePage(pageSetup.pageNumber-1)"><</button>
+
+  <button
+    *ngFor="let item of showPage();"
+    tabindex="0"
+    type="pageItem"
+    class="item"
+    [disabled]="item == pageSetup.pageNumber"
+    (click)="changePage(item)"
+  >
+    <span>{{item}}</span>
+  </button>
+
+  <button (click)="changePage(pageSetup.pageNumber+1)">></button>
+  <button (click)="changePage(pageSetup.pageCount)">>></button>
+</div>
+
+<br />
+result = {{pageSetup.totalItems}}
